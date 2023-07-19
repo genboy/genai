@@ -13,9 +13,12 @@ https://github.com/databrickslabs/dolly/tree/master/data
 https://github.com/databrickslabs/dolly
 https://github.com/databrickslabs/dolly
 
+
 #### OpenAI Api 
 An api resctricted by personal account and queries
-(../examples/openai)
+
+(../examples/openai-api)
+
 https://api.openai.com/
 https://api.openai.com/v1/engines/
 
