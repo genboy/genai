@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Genboy OpenAI Api Development area</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+
+        *{
+
+            box-sizing:border-box;margin:0;padding:0;
+
+        }
+
+        html{
+
+            height:100%;
+
+            width:100%;
+
+        }
+
+        body { 
+
+            
+
+            min-height:100%;
+
+            width:100%;
+
+        }
+
+
+
+        .maincontainer
+
+        {
+
+            min-height:100vh;
+
+            width:96%;
+
+            margin:0px auto;
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: center; 
+
+        }
+
+        .innercontent
+        {
+            max-width: 680px;
+            padding:30px 10px;
+            background-color:rgb(164, 249, 255);
+            border-radius: 15px;
+        }
+
+        input,textarea,button
+        {
+            border-radius: 10px; 
+            padding: 10px; 
+
+        }
+
+        #chat-log,
+        #user-input{
+            width: 96%; 
+            max-width: 580px; 
+
+        }
+
+        .chat-user1 { background-color: #FFD700; color: #000000; padding: 10px; border-radius: 10px; } 
+        /* ChatUser2 dialogue box */ 
+        .chat-user2 { background-color: #808080; color: #FFFFFF; padding: 10px; border-radius: 10px; } 
+        /* Chat button */ 
+        #send-btn { background-color: #008000; color: #FFFFFF; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+
+<body>
+
+    <div class="maincontainer">
+    <div class="innercontent">
+
+    <h1>OpenAI simple model select example</h1>
+
+    <div id="chat-container">
+
+      <div id="chat-log"></div>
+    <select id="model-select">
+
+        <option value="gpt-3.5-turbo" selected="selected">gpt-3.5-turbo</option> 
+        <option value="davinci">davinci</option>
+        <option value="curie">curie</option>
+         <!--
+        <option value="babbage">babbage</option>
+        <option value="ada">ada</option>
+        <option value="text-davinci-003">text-davinci-003</option> 
+        -->
+
+      </select>
+     <!--<textarea type="text" id="user-input" placeholder="Type your message..."></textarea>  -->
+      <input type="text" id="user-input" placeholder="Type your message..." value="" /> 
+      <button id="send-btn">Send</button>
+    </div>
+    <div>dependencies: openia account for api token, jquery for easy javascript functions running on php (8.1) server with curl for secure ajax request data handling.</div>
+    </div>
+
+    </div>
+
+    <script>
+        jQuery(function($){ 
+            // https://api.openai.com/v1/chat/completions
+            // code-davinci-002 - not available  - 08 07 2023
+
+            function sendMessage( textinput = false) {
+
+                let userInput = $('#user-input').val();
+                let selectModel = $('#model-select').val();
+
+                if(textinput){
+                    userInput = textinput;
+                }
+                //if (userInput.trim() === '') return;
+
+                $('#chat-log').append('<p class="chat-user1"><strong>You:</strong> ' + userInput + '</p>');
+                $('#user-input').val('');
+                console.log(userInput);
+              
+                $.ajax({
+                    url: 'openai-chat.php',
+                    type: 'POST',
+                    data: { user_input: userInput, model_select: selectModel },
+                    success: function (response) {
+                    //let json = JSON.parse(response);
+                    //let responsetext = json.choices[0].text.trim();
+                    console.log(response);
+                    /*
+                    // Regular expression pattern to match PHP code within <?php ... ?>
+                    let regex = /<\?php([\s\S]*?)\?>/;
+                    // Extract the PHP code substring
+                    let match = regex.exec(responsetext);
+                    let phpCode = match ? match[1].trim() : '';
+                    */
+                        $('#chat-log').append('<p class="chat-user2"><strong>AI:</strong> ' + response + '</p>');
+                    },
+                    error: function (xhr, status, error) {
+                      console.error('Error:', error);
+                    }
+                });
+            }
+
+            // doc ready
+            $(document).ready(function () {
+                // Bind the button press event
+                $('#send-btn').on('click', function(e){
+                    e.preventDefault();
+                    sendMessage();
+                });
+
+                // Bind the input enter key press event
+                $('#user-input').keypress(function (e) {
+                    if (e.keyCode === 13) {
+                       sendMessage();
+                    }
+                });
+                //sendMessage('Hello Neathan');
+            });
+        });
+    </script>
+</body>
+</html>
