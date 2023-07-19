@@ -27,4 +27,5 @@ https://api.openai.com/v1/engines/
 
 #### Text and Speech 
 https://www.section.io/engineering-education/speech-recognition-in-javascript/
+
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#browser_compatibility
