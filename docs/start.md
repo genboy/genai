@@ -20,6 +20,9 @@ https://mycroft.ai/
 
 https://github.com/MycroftAI
 
+https://github.com/jcasoft/Mycroft-Web-Client
+https://id.nl/huis-en-entertainment/beeld-en-geluid/hifi/mycroft-ai-skills-installeren-en-zelf-programmeren
+
 
 #### OpenAI Api 
 An api resctricted by personal account and queries
