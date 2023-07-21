@@ -13,6 +13,12 @@ https://github.com/databrickslabs/dolly/tree/master/data
 https://github.com/databrickslabs/dolly
 https://github.com/databrickslabs/dolly
 
+#### Mycroft
+An Open Source Artificial Intelligence for Everyone
+
+https://mycroft.ai/
+https://github.com/MycroftAI
+
 
 #### OpenAI Api 
 An api resctricted by personal account and queries
